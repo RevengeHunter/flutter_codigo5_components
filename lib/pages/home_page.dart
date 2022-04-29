@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo5_components/pages/avatar_page.dart';
+import 'package:flutter_codigo5_components/pages/review_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'alert_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -63,14 +66,14 @@ class HomePage extends StatelessWidget {
                 content: "Ir al detalle de Alerta",
                 icon: Icons.check_circle_rounded,
                 color: Color(0xff0096c7),
-                toPage: AvatarPage(),
+                toPage: AlertPage(),
               ),
               ItemComponentWidget(
-                title: "Inputs",
-                content: "Ir al detalle de Inputs",
+                title: "Review",
+                content: "Ir al detalle de Review",
                 icon: Icons.check_circle_rounded,
                 color: Color(0xff0096c7),
-                toPage: AvatarPage(),
+                toPage: ReviewPage(),
               ),
             ],
           ),
