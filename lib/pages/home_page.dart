@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo5_components/pages/avatar_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -50,15 +51,27 @@ class HomePage extends StatelessWidget {
                   thickness: 0.45,
                 ),
               ),
-              ItemComponentWidget(),
-              ItemComponentWidget(),
-              ItemComponentWidget(),
-              ItemComponentWidget(),
-              ItemComponentWidget(),
-              ItemComponentWidget(),
-              ItemComponentWidget(),
-              ItemComponentWidget(),
-              ItemComponentWidget(),
+              ItemComponentWidget(
+                title: "Avatar",
+                content: "Ir al detalle de Avatar",
+                icon: Icons.check_circle_outline,
+                color: Color(0xff4A5467),
+                toPage: AvatarPage(),
+              ),
+              ItemComponentWidget(
+                title: "Alerta",
+                content: "Ir al detalle de Alerta",
+                icon: Icons.check_circle_rounded,
+                color: Color(0xff0096c7),
+                toPage: AvatarPage(),
+              ),
+              ItemComponentWidget(
+                title: "Inputs",
+                content: "Ir al detalle de Inputs",
+                icon: Icons.check_circle_rounded,
+                color: Color(0xff0096c7),
+                toPage: AvatarPage(),
+              ),
             ],
           ),
         ),
@@ -68,9 +81,19 @@ class HomePage extends StatelessWidget {
 }
 
 class ItemComponentWidget extends StatelessWidget {
-  const ItemComponentWidget({
-    Key? key,
-  }) : super(key: key);
+  String title;
+  String content;
+  IconData icon;
+  Color color;
+  Widget toPage;
+
+  ItemComponentWidget({
+    required this.title,
+    required this.content,
+    required this.icon,
+    required this.color,
+    required this.toPage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -91,16 +114,19 @@ class ItemComponentWidget extends StatelessWidget {
         ],
       ),
       child: ListTile(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>toPage));
+        },
         leading: Icon(
-          Icons.check_circle_outline,
-          color: Color(0xff4A5467),
+          this.icon,
+          color: this.color,
         ),
         title: Text(
-          "Avatar",
+          this.title,
           style: GoogleFonts.poppins(),
         ),
         subtitle: Text(
-          "Ir al detalle de Avatar",
+          this.content,
           style: GoogleFonts.poppins(
             fontSize: 13.0,
           ),
