@@ -4,6 +4,9 @@ import 'package:flutter_codigo5_components/pages/review_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'alert_page.dart';
+import 'b_card_page.dart';
+import 'card_page.dart';
+import 'o_card_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -74,6 +77,27 @@ class HomePage extends StatelessWidget {
                 icon: Icons.check_circle_rounded,
                 color: Color(0xff0096c7),
                 toPage: ReviewPage(),
+              ),
+              ItemComponentWidget(
+                title: "Cards",
+                content: "Ir al detalle de Cards",
+                icon: Icons.check_circle_rounded,
+                color: Color(0xff0096c7),
+                toPage: CardPage(),
+              ),
+              ItemComponentWidget(
+                title: "Exercise One",
+                content: "Ir al detalle de Exercise One",
+                icon: Icons.check_circle_rounded,
+                color: Color(0xff0096c7),
+                toPage: OCardPage(),
+              ),
+              ItemComponentWidget(
+                title: "Exercise Two",
+                content: "Ir al detalle de Exercise Two",
+                icon: Icons.check_circle_rounded,
+                color: Color(0xff0096c7),
+                toPage: BCardPage(),
               ),
             ],
           ),
