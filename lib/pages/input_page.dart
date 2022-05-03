@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InputPage extends StatelessWidget {
-  const InputPage({Key? key}) : super(key: key);
+class InputPage extends StatefulWidget {
+
+
+  @override
+  State<InputPage> createState() => _InputPageState();
+}
+
+class _InputPageState extends State<InputPage> {
+  bool isInvisible = true;
+  String name = '';
 
   @override
   Widget build(BuildContext context) {
@@ -166,17 +174,35 @@ class InputPage extends StatelessWidget {
                 height: 20.0,
               ),
               TextField(
-                obscureText: true,
+                obscureText: isInvisible,
                 decoration: InputDecoration(
                   hintText: "Ingrese su Contraseña",
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.remove_red_eye_sharp),
+                    icon: isInvisible ? Icon(Icons.remove_red_eye) : Icon(Icons.remove_red_eye_outlined),
                     onPressed: (){
-
+                      isInvisible = !isInvisible;
+                      setState(() {});
                     },
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  label: Text("Ingrese tu nombre",),
+                ),
+                onChanged: (String value){
+                  name= value;
+                },
+                onTap: (){
+                  print("On Tap...");
+                },
+              ),
+              ElevatedButton(onPressed: (){
+                print(name);
+              }, child: Text("Mostrar Valor!",),),
               const SizedBox(
                 height: 20.0,
               ),
