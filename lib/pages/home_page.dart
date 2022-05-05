@@ -7,6 +7,7 @@ import 'alert_page.dart';
 import 'b_card_page.dart';
 import 'card_page.dart';
 import 'input_page.dart';
+import 'list_page.dart';
 import 'o_card_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -106,6 +107,13 @@ class HomePage extends StatelessWidget {
                 icon: Icons.check_circle_rounded,
                 color: Color(0xff0096c7),
                 toPage: InputPage(),
+              ),
+              ItemComponentWidget(
+                title: "Listas",
+                content: "Ir al detalle de Listas",
+                icon: Icons.check_circle_rounded,
+                color: Color(0xff0096c7),
+                toPage: ListPage(),
               ),
             ],
           ),

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InputPage extends StatefulWidget {
-
-
   @override
   State<InputPage> createState() => _InputPageState();
 }
@@ -11,6 +9,17 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   bool isInvisible = true;
   String name = '';
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _dateTimeController = TextEditingController();
+
+  List<String> superHeros = [
+    "Superman",
+    "Batman",
+    "WonderWoman",
+    "Green Lantern"
+  ];
+
+  String valueAux = "Superman";
 
   @override
   Widget build(BuildContext context) {
@@ -178,8 +187,10 @@ class _InputPageState extends State<InputPage> {
                 decoration: InputDecoration(
                   hintText: "Ingrese su Contraseña",
                   suffixIcon: IconButton(
-                    icon: isInvisible ? Icon(Icons.remove_red_eye) : Icon(Icons.remove_red_eye_outlined),
-                    onPressed: (){
+                    icon: isInvisible
+                        ? Icon(Icons.remove_red_eye)
+                        : Icon(Icons.remove_red_eye_outlined),
+                    onPressed: () {
                       isInvisible = !isInvisible;
                       setState(() {});
                     },
@@ -190,19 +201,68 @@ class _InputPageState extends State<InputPage> {
                 height: 20.0,
               ),
               TextField(
+                controller: _nameController,
+                keyboardType: TextInputType.name,
                 decoration: InputDecoration(
-                  label: Text("Ingrese tu nombre",),
+                  label: Text(
+                    "Ingrese tu nombre",
+                  ),
                 ),
-                onChanged: (String value){
-                  name= value;
+                // onChanged: (String value){
+                //   name= value;
+                // },
+                // onTap: (){
+                //   print("On Tap...");
+                // },
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  getNameData();
+                  setState(() {});
                 },
-                onTap: (){
-                  print("On Tap...");
+                child: Text(
+                  "Mostrar Valor!",
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              TextField(
+                controller: _dateTimeController,
+                toolbarOptions: ToolbarOptions(
+                  copy: false,
+                  cut: false,
+                  paste: false,
+                  selectAll: false,
+                ),
+                readOnly: true,
+                decoration: InputDecoration(
+                  hintText: "Fecha de Nacimiento",
+                  suffixIcon: Icon(Icons.date_range),
+                ),
+                onTap: () {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  selectDate();
                 },
               ),
-              ElevatedButton(onPressed: (){
-                print(name);
-              }, child: Text("Mostrar Valor!",),),
+              const SizedBox(
+                height: 20.0,
+              ),
+              DropdownButton(
+                value: valueAux,
+                items: superHeros
+                    .map((e) => DropdownMenuItem(
+                          child: Text(e),
+                          value: e,
+                        ))
+                    .toList(),
+                //items: listaItems(),
+                onChanged: (value) {
+                  //print(value.toString());
+                  valueAux = value.toString();
+                  setState(() {});
+                },
+              ),
               const SizedBox(
                 height: 20.0,
               ),
@@ -211,5 +271,35 @@ class _InputPageState extends State<InputPage> {
         ),
       ),
     );
+  }
+
+  void getNameData() {
+    print(_nameController.text);
+  }
+
+  selectDate() async {
+    DateTime? dateSelected = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2099),
+    );
+    if (dateSelected != null)
+      _dateTimeController.text = dateSelected.toString().substring(0, 10);
+    //setState(() {});
+  }
+
+  List<DropdownMenuItem<String>> listaItems() {
+    List<DropdownMenuItem<String>> listaSuperHero = [];
+    superHeros.forEach((element) {
+      listaSuperHero.add(DropdownMenuItem(
+        value: element,
+        child: Text(
+          element,
+        ),
+      ));
+    });
+
+    return listaSuperHero;
   }
 }
